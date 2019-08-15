@@ -5,12 +5,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-public class FragmentFrameSwapper {
+public class FragmentFrameManager {
 
     private final FragmentManager mFragmentManager;
     private final FragmentFrameWrapper mFragmentFrameWrapper;
 
-    public FragmentFrameSwapper(FragmentManager manager, FragmentFrameWrapper wrapper) {
+    public FragmentFrameManager(FragmentManager manager, FragmentFrameWrapper wrapper) {
         mFragmentManager = manager;
         mFragmentFrameWrapper = wrapper;
     }
@@ -19,7 +19,12 @@ public class FragmentFrameSwapper {
 
         FragmentTransaction ft = mFragmentManager.beginTransaction();
 
-        ft.replace(getFragmentId(), newFragment);
+        if(mFragmentManager.getBackStackEntryCount() == 0) {
+            ft.add(getFragmentId(), newFragment);
+        } else {
+            ft.replace(getFragmentId(), newFragment);
+        }
+
         ft.addToBackStack(null);
         ft.commit();
 

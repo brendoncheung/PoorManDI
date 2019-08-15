@@ -12,13 +12,22 @@ import java.util.List;
 import alephreach.com.poormandi.Networking.LatestMovie;
 import alephreach.com.poormandi.R;
 
-public class LatestMovieAdapter extends RecyclerView.Adapter<LatestMovieAdapter.ViewHolder> {
+public class LatestMovieAdapter extends RecyclerView.Adapter<LatestMovieAdapter.ViewHolder>  {
 
     private List<LatestMovie> mLatestMovieList;
+    private final Listener mListener;
 
     public void bindMovie(List<LatestMovie> movies) {
         mLatestMovieList = movies;
         notifyDataSetChanged();
+    }
+
+    public interface Listener {
+        void onMovieItemClicked(LatestMovie movie);
+    }
+
+    public LatestMovieAdapter (Listener listener) {
+        mListener = listener;
     }
 
     @NonNull
@@ -43,10 +52,14 @@ public class LatestMovieAdapter extends RecyclerView.Adapter<LatestMovieAdapter.
 
     @Override
     public int getItemCount() {
-        return mLatestMovieList.size();
+        if (mLatestMovieList == null) {
+            return 0;
+        } else {
+            return mLatestMovieList.size();
+        }
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mTitle;
         private TextView mRating;
@@ -55,6 +68,14 @@ public class LatestMovieAdapter extends RecyclerView.Adapter<LatestMovieAdapter.
             super(itemView);
             mTitle = itemView.findViewById(R.id.latest_movie_id);
             mRating = itemView.findViewById(R.id.latest_movie_vote_id);
-        }
+            itemView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    mListener.onMovieItemClicked(mLatestMovieList.get(getAdapterPosition()));
+                }
+            });
+
+           }
     }
 }

@@ -9,4 +9,7 @@ public class Movie {
     @SerializedName("results")
     private List<LatestMovie> mLatestMovieList;
 
+    public List<LatestMovie> getLatestMovieList() {
+        return mLatestMovieList;
+    }
 }

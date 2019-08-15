@@ -5,8 +5,10 @@ import android.support.v4.app.FragmentManager;
 
 import alephreach.com.poormandi.Networking.MovieDBApi;
 import alephreach.com.poormandi.Networking.FetchLatestMovieUseCase;
-import alephreach.com.poormandi.services.FragmentFrameSwapper;
+import alephreach.com.poormandi.adapers.LatestMovieAdapter;
+import alephreach.com.poormandi.services.FragmentFrameManager;
 import alephreach.com.poormandi.services.FragmentFrameWrapper;
+import alephreach.com.poormandi.services.FragmentNavigator;
 
 public class ControllerCompositionRoot {
 
@@ -34,14 +36,22 @@ public class ControllerCompositionRoot {
         return (FragmentFrameWrapper) getActivity();
     }
 
-    public FragmentFrameSwapper getFragmentFrameSwapper() {
-        return new FragmentFrameSwapper(getFragmentManager(), getFragmentFrameWrapper());
+    private FragmentFrameManager getFragmentFrameManager() {
+        return new FragmentFrameManager(getFragmentManager(), getFragmentFrameWrapper());
     }
 
+
+    public LatestMovieAdapter getLatestMovieAdapter(LatestMovieAdapter.Listener listener) {
+        return new LatestMovieAdapter(listener);
+    }
 
 
     public FetchLatestMovieUseCase getFetchCurrentWeatherUsecase() {
         return new FetchLatestMovieUseCase(getDarkSkyApi());
+    }
+
+    public FragmentNavigator getFragmentNavigator() {
+        return new FragmentNavigator(getFragmentFrameManager());
     }
 
 
