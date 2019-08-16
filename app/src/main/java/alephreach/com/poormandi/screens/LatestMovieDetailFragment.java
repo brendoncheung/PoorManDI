@@ -33,7 +33,6 @@ public class LatestMovieDetailFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_latest_movie_description, container, false);
         mDescriptionTextView = view.findViewById(R.id.latest_movie_description_id);
-
         mDescriptionTextView.setText(getArguments().getString(LatestMovieDetailFragment.MOVIE_DESC_KEY));
 
         return view;

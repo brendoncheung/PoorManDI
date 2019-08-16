@@ -35,7 +35,7 @@ public class FetchLatestMovieUseCase {
 
     public void fetchLatestMovieAndNotify() {
 
-        mMovieDBApi.getCurrentWeather(Constants.MOVIEDB_API_KEY).enqueue(new Callback<Movie>() {
+        mMovieDBApi.getLatestMovies(Constants.MOVIEDB_API_KEY).enqueue(new Callback<Movie>() {
             @Override
             public void onResponse(Call<Movie> call, Response<Movie> response) {
                 Log.d("Retrofit", call.request().toString());

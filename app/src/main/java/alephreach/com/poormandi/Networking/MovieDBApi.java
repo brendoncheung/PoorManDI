@@ -7,5 +7,5 @@ import retrofit2.http.Query;
 public interface MovieDBApi {
 
     @GET("/3/movie/popular")
-    Call<Movie> getCurrentWeather(@Query("api_key")String key);
+    Call<Movie> getLatestMovies(@Query("api_key")String key);
 }

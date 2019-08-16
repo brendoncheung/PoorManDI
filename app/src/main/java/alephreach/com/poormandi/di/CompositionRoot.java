@@ -21,7 +21,7 @@ public class CompositionRoot {
         return mRetrofit;
     }
 
-    public MovieDBApi getDarkSkyApi() {
+    public MovieDBApi getMovieDBApi() {
         return getRetrofit().create(MovieDBApi.class);
     }
 

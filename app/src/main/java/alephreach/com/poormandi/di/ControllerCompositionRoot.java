@@ -21,7 +21,7 @@ public class ControllerCompositionRoot {
     }
 
     private MovieDBApi getDarkSkyApi() {
-        return mCompositionRoot.getDarkSkyApi();
+        return mCompositionRoot.getMovieDBApi();
     }
 
     private FragmentActivity getActivity() {
@@ -46,7 +46,7 @@ public class ControllerCompositionRoot {
     }
 
 
-    public FetchLatestMovieUseCase getFetchCurrentWeatherUsecase() {
+    public FetchLatestMovieUseCase getFetchLatestMovieUseCase() {
         return new FetchLatestMovieUseCase(getDarkSkyApi());
     }
 
